@@ -20,7 +20,7 @@ while True:
         break
     else:
         offset += 100
-
+records.reverse()
 
 formattedX = []
 formatted_cert_of_indebt = []
@@ -48,6 +48,11 @@ formattedY = [formatted_cert_of_indebt, formatted_gov_notes_coins_circulation, f
 
 # Plot
 plt.stackplot(formattedX, formattedY, labels=['cert_of_indebt','gov_notes_coins_circulation', 'aggr_balance_bf_disc_win', 'outstanding_efbn'])
+
+plt.title("Monetary Base Composition")
+plt.xlabel("End of month")
+plt.ylabel("(HK$ million)")
 plt.xticks(['2020-06', '2016-06', '2012-06', '2008-06', '2004-06', '1998-09'])
+# plt.xticks(rotation=90)
 plt.legend(loc='upper left')
 plt.show()
