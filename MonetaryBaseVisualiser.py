@@ -46,7 +46,7 @@ for record in records:
     formatted_outstanding_efbn += [record['outstanding_efbn']]
 
 formattedY = [formatted_cert_of_indebt, formatted_gov_notes_coins_circulation,
-              formatted_cert_of_indebt, formatted_outstanding_efbn]
+              formatted_aggr_balance_bf_disc_win, formatted_outstanding_efbn]
 
 # Plot
 plt.stackplot(
