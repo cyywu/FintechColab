@@ -207,39 +207,10 @@ def TDHKD():
         formatted_m3_total_Y += [msa_records[i]['m3_total']]
         formatted_tdhkd_Y += [td_records[i]['deposits_hkd']]
 
-    # Plot tdhkd and m3
-    fig, ax1 = plt.subplots()
-
-    color = 'tab:green'
-    ax1.set_xlabel("End of month")
-    ax1.set_ylabel("HK$ million", color=color)
-    ax1.set_xlabel('time (s)')
-    ax1.plot(formatted_X, formatted_tdhkd_Y, color=color, label="tdhkd")
-    ax1.tick_params(axis='y', labelcolor=color)
-    
-    ax1.set_xticks([formatted_X[-1], '2016-06', '2012-06',
-                '2008-06', '2004-06', '1998-09'])
-
-    ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
-
-    color = 'tab:red'
-    ax2.set_ylabel("HK$ million", color=color)
-    ax2.plot(formatted_X, formatted_m3_total_Y, color=color, label="m3")
-    ax2.tick_params(axis='y', labelcolor=color)
-
-    fig.tight_layout()  # otherwise the right y-label is slightly clipped
-    ax2.set_xticks([formatted_X[-1], '2016-06', '2012-06',
-                '2008-06', '2004-06', '1998-09'])
-
-    ax1.legend(loc='upper left')
-    ax2.legend(loc='center left')
-    
-    plt.show()
-
     # Plot tdhkd
     plt.plot(formatted_X, formatted_tdhkd_Y, color='green',
              linewidth=4, alpha=0.7, label="m3")
-    plt.title("Total deposits (HKD)")
+    plt.title("2. Total deposits (HKD)")
     plt.xlabel("End of month")
     plt.ylabel("HK$ million")
     plt.xticks([formatted_X[-1], '2016-06', '2012-06',
@@ -258,4 +229,33 @@ def TDHKD():
     plt.legend(loc='upper left')
     plt.show()
 
-TDHKD()
+    # Plot tdhkd and m3
+    fig, ax1 = plt.subplots()
+
+    color = 'tab:green'
+    ax1.set_xlabel("End of month")
+    ax1.set_ylabel("HK$ million", color=color)
+    ax1.set_xlabel('time (s)')
+    ax1.plot(formatted_X, formatted_tdhkd_Y, color=color, label="Total deposits (HKD)")
+    ax1.tick_params(axis='y', labelcolor=color)
+    
+    ax1.set_xticks([formatted_X[-1], '2016-06', '2012-06',
+                '2008-06', '2004-06', '1998-09'])
+
+    ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
+
+    color = 'tab:red'
+    ax2.set_ylabel("HK$ million", color=color)
+    ax2.plot(formatted_X, formatted_m3_total_Y, color=color, label="M3 Total")
+    ax2.tick_params(axis='y', labelcolor=color)
+
+    fig.tight_layout()  # otherwise the right y-label is slightly clipped
+    ax2.set_xticks([formatted_X[-1], '2016-06', '2012-06',
+                '2008-06', '2004-06', '1998-09'])
+
+    ax1.legend(loc='upper left')
+    ax2.legend(loc='center left')
+    ax1.set_title("Total deposits (HKD) and M3 Total Correlation")
+    plt.show()
+
+# TDHKD()
