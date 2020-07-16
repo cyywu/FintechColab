@@ -1,6 +1,6 @@
-# MonetaryBaseVisualiser
+# Financial Data Visualiser
 
-To play with Jupyther Notebook
+To play with the Jupyther Notebook
 1. go to https://mybinder.org/
 
 2. GithHub repository name or URL: https://github.com/cyywu/MonetaryBaseVisualiser
