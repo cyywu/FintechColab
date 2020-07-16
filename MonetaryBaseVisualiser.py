@@ -76,6 +76,7 @@ def MBC():
     plt.xticks([formattedX[-1], '2016-06', '2012-06',
                 '2008-06', '2004-06', '1998-09'])
     plt.legend(loc='upper left')
+    plt.rcParams['figure.figsize'] = [20, 10]
     plt.show()
 
 
@@ -135,6 +136,7 @@ def MM():
     plt.xticks([formatted_X[-1], '2016-06', '2012-06',
                 '2008-06', '2004-06', '1998-09'])
     plt.legend(loc='upper left')
+    plt.rcParams['figure.figsize'] = [20, 10]
     plt.show()
 
     # Plot m3
@@ -145,6 +147,7 @@ def MM():
     plt.xticks([formatted_X[-1], '2016-06', '2012-06',
                 '2008-06', '2004-06', '1998-09'])
     plt.legend(loc='upper left')
+    plt.rcParams['figure.figsize'] = [20, 10]
     plt.show()
     
     # Plot mb
@@ -155,6 +158,7 @@ def MM():
     plt.xticks([formatted_X[-1], '2016-06', '2012-06',
                 '2008-06', '2004-06', '1998-09'])
     plt.legend(loc='upper left')
+    plt.rcParams['figure.figsize'] = [20, 10]
     plt.show()
 
 MM()
