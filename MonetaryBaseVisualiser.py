@@ -12,8 +12,6 @@ context = ssl._create_unverified_context()
 print("dependency ready")
 
 # ---------------- Monetary Base Data ----------------
-
-
 def get_MBC_from_HKMA():
     # Monetary Base Data released by hkma monthly
     url = 'https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/monetary-operation/monetary-base-endperiod?choose=end_of_month&from=1998-09&to=now&sortby=end_of_month&sortorder=asc'
@@ -81,7 +79,8 @@ def MBC():
     plt.show()
 
 
-# MBC()
+MBC()
+
 
 # ---------------- 1. Money Multiplier = M3 / MB (HKD) ----------------
 def get_MSA_from_HKMA():
@@ -118,12 +117,11 @@ def MM():
     formatted_mb_total_Y = []
 
     for i in range(syncLength):
-        mm = msa_records[i]['m3_total'] / \
-            mbc_records[i]['mb_bf_disc_win_total']
+        mm = msa_records[i]['m3_total'] / mbc_records[i]['mb_bf_disc_win_total']
         end_of_month = msa_records[i]['end_of_month']
-
+        
         if(not msa_records[i]['end_of_month'] == mbc_records[i]['end_of_month']):
-            print("something wrong here, please check")  # date sync check
+            print("something wrong here, please check") # date sync check
 
         formatted_X += [end_of_month]
         formatted_mm_Y += [mm]
@@ -131,8 +129,7 @@ def MM():
         formatted_mb_total_Y += [mbc_records[i]['mb_bf_disc_win_total']]
 
     # Plot mm
-    plt.plot(formatted_X, formatted_mm_Y, color='orange',
-             linewidth=4, alpha=0.7, label="money multiplier")
+    plt.plot(formatted_X, formatted_mm_Y, color='orange', linewidth=4, alpha=0.7, label="money multiplier")
     plt.title("1. Money Multiplier = M3 / MB (HKD)")
     plt.xlabel("End of month")
     plt.ylabel("m3 to mb ratio")
@@ -142,8 +139,7 @@ def MM():
     plt.show()
 
     # Plot m3
-    plt.plot(formatted_X, formatted_m3_total_Y, color='red',
-             linewidth=4, alpha=0.7, label="m3")
+    plt.plot(formatted_X, formatted_m3_total_Y, color='red', linewidth=4, alpha=0.7, label="m3")
     plt.title("M3 Total")
     plt.xlabel("End of month")
     plt.ylabel("HK$ million")
@@ -151,10 +147,9 @@ def MM():
                 '2008-06', '2004-06', '1998-09'])
     plt.legend(loc='upper left')
     plt.show()
-
+    
     # Plot mb
-    plt.plot(formatted_X, formatted_mb_total_Y, color='blue',
-             linewidth=4, alpha=0.7, label="mb")
+    plt.plot(formatted_X, formatted_mb_total_Y, color='blue', linewidth=4, alpha=0.7, label="mb")
     plt.title("Total Monetary Base before Discount Window")
     plt.xlabel("End of month")
     plt.ylabel("HK$ million")
@@ -163,7 +158,8 @@ def MM():
     plt.legend(loc='upper left')
     plt.show()
 
-# MM()
+MM()
+
 
 # ---------------- 2. Total deposits & M3 (HKD) ----------------
 def get_TD_from_HKMA():
@@ -258,4 +254,4 @@ def TDHKD():
     ax1.set_title("Total deposits (HKD) and M3 Total Correlation")
     plt.show()
 
-# TDHKD()
+TDHKD()
