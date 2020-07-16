@@ -11,3 +11,5 @@ jupyter/Financial Data Visualizer.ipynb
 4. click 'Launch'
 
 5. On 'Cell' tap, click 'Run All'
+
+Example (16 July 2020): https://hub.gke.mybinder.org/user/cyywu-monetarybasevisualiser-by3cyclw/notebooks/jupyter/Financial%20Data%20Visualizer.ipynb
