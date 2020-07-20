@@ -111,15 +111,15 @@ def MM():
 
     syncLength = min(len(mbc_records), len(msa_records))
     mbc_records = mbc_records[:syncLength]  # mb_bf_disc_win_total
-    msa_records = msa_records[:syncLength]  # m3_total
+    msa_records = msa_records[:syncLength]  # m3_hkd
 
     formatted_X = []
     formatted_mm_Y = []
-    formatted_m3_total_Y = []
+    formatted_m3_hkd_Y = []
     formatted_mb_total_Y = []
 
     for i in range(syncLength):
-        mm = msa_records[i]['m3_total'] / mbc_records[i]['mb_bf_disc_win_total']
+        mm = msa_records[i]['m3_hkd'] / mbc_records[i]['mb_bf_disc_win_total']
         end_of_month = msa_records[i]['end_of_month']
         
         if(not msa_records[i]['end_of_month'] == mbc_records[i]['end_of_month']):
@@ -127,7 +127,7 @@ def MM():
 
         formatted_X += [end_of_month]
         formatted_mm_Y += [mm]
-        formatted_m3_total_Y += [msa_records[i]['m3_total']]
+        formatted_m3_hkd_Y += [msa_records[i]['m3_hkd']]
         formatted_mb_total_Y += [mbc_records[i]['mb_bf_disc_win_total']]
 
     # Plot mm
@@ -141,8 +141,8 @@ def MM():
     plt.show()
 
     # Plot m3
-    plt.plot(formatted_X, formatted_m3_total_Y, color='#E30D55', linewidth=4, alpha=0.7, label="m3")
-    plt.title("M3 Total")
+    plt.plot(formatted_X, formatted_m3_hkd_Y, color='#E30D55', linewidth=4, alpha=0.7, label="m3hkd")
+    plt.title("M3 HKD")
     plt.xlabel("End of month")
     plt.ylabel("HK$ million")
     plt.xticks([formatted_X[-1], '2016-06', '2012-06',
@@ -152,7 +152,7 @@ def MM():
     
     
     # Plot mb
-    plt.plot(formatted_X, formatted_mb_total_Y, color='#6FE50E', linewidth=4, alpha=0.7, label="mb")
+    plt.plot(formatted_X, formatted_mb_total_Y, color='#6FE50E', linewidth=4, alpha=0.7, label="mbhkd")
     plt.title("Total Monetary Base before Discount Window")
     plt.xlabel("End of month")
     plt.ylabel("HK$ million")
