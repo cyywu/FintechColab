@@ -150,6 +150,7 @@ def MM():
     plt.legend(loc='upper left')
     plt.show()
     
+    
     # Plot mb
     plt.plot(formatted_X, formatted_mb_total_Y, color='#6FE50E', linewidth=4, alpha=0.7, label="mb")
     plt.title("Total Monetary Base before Discount Window")
@@ -190,11 +191,11 @@ def TDHKD():
 
     syncLength = min(len(td_records), len(msa_records))
     td_records = td_records[:syncLength]  # deposits_hkd
-    msa_records = msa_records[:syncLength]  # m3_total
+    msa_records = msa_records[:syncLength]  # m3_hkd
 
     formatted_X = []
     formatted_tdhkd_Y = []
-    formatted_m3_total_Y = []
+    formatted_m3_hkd_Y = []
 
     for i in range(syncLength):
         end_of_month = msa_records[i]['end_of_month']
@@ -202,7 +203,7 @@ def TDHKD():
             print("something wrong here, please check")  # date sync check
 
         formatted_X += [end_of_month]
-        formatted_m3_total_Y += [msa_records[i]['m3_total']]
+        formatted_m3_hkd_Y += [msa_records[i]['m3_hkd']]
         formatted_tdhkd_Y += [td_records[i]['deposits_hkd']]
 
     # Plot tdhkd
@@ -216,10 +217,10 @@ def TDHKD():
     plt.legend(loc='upper left')
     plt.show()
 
-    # Plot m3
-    plt.plot(formatted_X, formatted_m3_total_Y, color='#00C4C4',
+    # Plot m3hkd
+    plt.plot(formatted_X, formatted_m3_hkd_Y, color='#00C4C4',
              linewidth=4, alpha=0.7, label="m3")
-    plt.title("M3 Total")
+    plt.title("M3 HKD")
     plt.xlabel("End of month")
     plt.ylabel("HK$ million")
     plt.xticks([formatted_X[-1], '2016-06', '2012-06',
@@ -229,8 +230,8 @@ def TDHKD():
 
     # Plot tdhkd and m3
     plt.plot(formatted_X, formatted_tdhkd_Y, color='#F05900', label="Total deposits (HKD)")
-    plt.plot(formatted_X, formatted_m3_total_Y, color='#00C4C4', label="M3 Total")
-    plt.title("Total deposits (HKD) and M3 Total Correlation")
+    plt.plot(formatted_X, formatted_m3_hkd_Y, color='#00C4C4', label="M3 (HKD)")
+    plt.title("Total deposits (HKD) and M3 (HKD) Correlation")
     plt.xlabel("End of month")
     plt.ylabel("HK$ million")
     plt.xticks([formatted_X[-1], '2016-06', '2012-06',
