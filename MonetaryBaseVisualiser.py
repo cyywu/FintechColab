@@ -1,7 +1,3 @@
-# only uncomment it in jupyter notebook
-# import sys
-# !{sys.executable} -m pip install matplotlib >/dev/null 2>&1
-
 import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set()
