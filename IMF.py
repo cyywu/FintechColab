@@ -118,13 +118,22 @@ with urllib.request.urlopen(url, context=context) as req:
     cofer.fx_ar_OC = pd.to_numeric(cofer.fx_ar_OC)
 
     # Plot COFER
-    plt.plot(cofer.date.values.tolist(), cofer.fx.values.tolist(), color='#F05900', linewidth=4, alpha=1, label="Total_FX")
-    plt.plot(cofer.date.values.tolist(), cofer.fx_ar_USD.values.tolist(), color='#6FE50E', linewidth=4, alpha=1, label="USD")
-    plt.plot(cofer.date.values.tolist(), cofer.fx_ar_EURO.values.tolist(), color='#E369AE', linewidth=4, alpha=1, label="EURO")
-    plt.plot(cofer.date.values.tolist(), cofer.fx_ar_CNY.values.tolist(), color='#00C4C4', linewidth=4, alpha=1, label="CNY")
+    plt.plot(cofer.date.values.tolist(), cofer.fx.values.tolist(), linewidth=4, alpha=1, label="Total_FX")
+    plt.plot(cofer.date.values.tolist(), cofer.fx_ar_USD.values.tolist(), linewidth=1, alpha=1, label="USD")
+    plt.plot(cofer.date.values.tolist(), cofer.fx_ar_EURO.values.tolist(), linewidth=1, alpha=1, label="EURO")
+    plt.plot(cofer.date.values.tolist(), cofer.fx_ar_CNY.values.tolist(), linewidth=1, alpha=1, label="CNY")
+    plt.plot(cofer.date.values.tolist(), cofer.fx_ar_JPY.values.tolist(), linewidth=1, alpha=1, label="JPY")
+    plt.plot(cofer.date.values.tolist(), cofer.fx_ar_GBP.values.tolist(), linewidth=1, alpha=1, label="GBP")
+    plt.plot(cofer.date.values.tolist(), cofer.fx_ar_AUD.values.tolist(), linewidth=1, alpha=1, label="AUD")
+    plt.plot(cofer.date.values.tolist(), cofer.fx_ar_CAD.values.tolist(), linewidth=1, alpha=1, label="CAD")
+    plt.plot(cofer.date.values.tolist(), cofer.fx_ar_CHF.values.tolist(), linewidth=1, alpha=1, label="CHF")
+    plt.plot(cofer.date.values.tolist(), cofer.fx_ar_OC.values.tolist(), linewidth=1, alpha=1, label="Other Currency")
+
     plt.title("Cofer")
     plt.xlabel("Period")
     plt.ylabel("US Dollars (Millions)")
     plt.xticks(['1999-Q1','2004-Q1','2008-Q1','2012-Q1','2016-Q1','2020-Q1'])
     plt.legend(loc='upper left')
     plt.show()
+
+    print(cofer)
