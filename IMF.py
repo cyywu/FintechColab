@@ -1,3 +1,7 @@
+fixed_plot_width = True # set it to False if you prefer a responsive width
+plot_width = 600
+
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set()
@@ -128,6 +132,7 @@ cofer.fx_ar_CHF = pd.to_numeric(cofer.fx_ar_CHF) * 1000000
 cofer.fx_ar_OC = pd.to_numeric(cofer.fx_ar_OC) * 1000000
 cofer.fx_ar_CNY_pt = pd.to_numeric(cofer.fx_ar_CNY_pt)
 
+
 # Plot Total Foreign Exchange
 fig = go.Figure()
 fig.update_xaxes(
@@ -147,7 +152,6 @@ fig.update_layout(
     title_text="<b>Total Foreign Exchange</b>",
     xaxis_title='End of period <b>(Quarterly)</b>',
     yaxis_title='<b>USD</b> US Dollars',
-    width=800,
     height=400,
     showlegend=True,
     legend=dict(
@@ -157,6 +161,8 @@ fig.update_layout(
         x=0.01
     )
 )
+if fixed_plot_width:
+  fig.update_layout(width=plot_width)
 fig.show()
 
 # Plot ar / ur
@@ -184,7 +190,6 @@ fig.update_layout(
       range=[1, 100],
       ticksuffix='%'
     ),
-    width=800,
     height=400,
     showlegend=True,
     legend=dict(
@@ -194,6 +199,8 @@ fig.update_layout(
         x=0.01
     )
 )
+if fixed_plot_width:
+  fig.update_layout(width=plot_width)
 fig.show()
 
 # Plot Share of CNY
@@ -215,7 +222,6 @@ fig.add_trace(go.Scatter(x=cofer.date, y=cofer.fx_ar_CNY_pt, mode='lines', name=
 fig.update_layout(
     title_text="<b>Shares of Chinese Renminbi in Cofer</b>",
     xaxis_title='End of period <b>(Quarterly)</b>',
-    width=800,
     height=400,
     showlegend=True,
     legend=dict(
@@ -225,9 +231,12 @@ fig.update_layout(
         x=0.01
     )
 )
+if fixed_plot_width:
+  fig.update_layout(width=plot_width)
 fig.update_yaxes(title_text=" <b>USD</b> US Dollars", secondary_y=False)
 fig.update_yaxes(title_text="<b>%</b> Percentage", secondary_y=True)
 fig.show()
+
 
 # Plot Composition
 fig = go.Figure()
@@ -261,7 +270,6 @@ fig.update_layout(
       range=[1, 100],
       ticksuffix='%'
     ),
-    width=800,
     height=1000,
     showlegend=True,
     legend=dict(
@@ -271,4 +279,6 @@ fig.update_layout(
         x=0.01
     )
 )
+if fixed_plot_width:
+  fig.update_layout(width=plot_width)
 fig.show()
