@@ -1,5 +1,5 @@
-fixed_plot_width = True # set it to False if you prefer a responsive width
-plot_width = 600
+fixed_plot_width = True # set it to False and click Runtime > Run all if you prefer a responsive width
+plot_width = 600 # customise plot_width and click Runtime > Run all if you prefer a plot_width other than 600px
 
 
 import matplotlib.pyplot as plt
