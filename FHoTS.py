@@ -214,3 +214,71 @@ fig.update_layout(
 if fixed_plot_width:
   fig.update_layout(width=plot_width)
 fig.show()
+
+
+# plot stacked chart
+fig = go.Figure()
+fig.update_xaxes(
+  rangeselector=dict(
+      buttons=list([
+          dict(count=1, label="1y", step="year", stepmode="backward"),
+          dict(count=3, label="3y", step="year", stepmode="backward"),
+          dict(count=6, label="6y", step="year", stepmode="backward"),
+          dict(count=10, label="10y", step="year", stepmode="backward"),
+          dict(count=15, label="15y", step="year", stepmode="backward"),
+          dict(step="all")
+      ])
+    )
+)
+for col in dfColumns: 
+  if not col == 'date':
+    fig.add_trace(go.Scatter(x=fhots.date, y=fhots[col], mode='lines', line=dict(width=0.5), stackgroup='fhots', name=(re.sub('_',' ',re.sub('fhots_','',col)))))
+
+fig.update_layout(
+    title_text="<b>Composition of FHoTS (stacked)</b>",
+    xaxis_title='End of period <b>(Monthly)</b>',
+    yaxis_title='<b>USD</b> US Dollars',
+    height=700,
+    showlegend=True,
+)
+if fixed_plot_width:
+  fig.update_layout(width=plot_width)
+fig.show()
+
+# plot individual country
+bgcolor = 'lightblue'
+for col in dfColumns: 
+  if not col == 'date':
+    # plot consolidated chart
+    fig = go.Figure()
+    fig.update_xaxes(
+      rangeselector=dict(
+          buttons=list([
+              dict(count=1, label="1y", step="year", stepmode="backward"),
+              dict(count=3, label="3y", step="year", stepmode="backward"),
+              dict(count=6, label="6y", step="year", stepmode="backward"),
+              dict(count=10, label="10y", step="year", stepmode="backward"),
+              dict(count=15, label="15y", step="year", stepmode="backward"),
+              dict(step="all")
+          ])
+        )
+    )
+  
+    fig.add_trace(go.Scatter(x=fhots.date, y=fhots[col], mode='lines', name=(re.sub('_',' ',re.sub('fhots_','',col))), line=dict(width=1.5)))
+
+    fig.update_layout(
+        title_text="<b>" + re.sub('_',' ',re.sub('fhots_','',col)) + "</b>",
+        xaxis_title='End of period <b>(Monthly)</b>',
+        yaxis_title='<b>USD</b> US Dollars',
+        height=400,
+        width=500,
+        yaxis_rangemode="tozero",
+        plot_bgcolor = bgcolor
+    )
+    fig.show()
+
+    # trigger the bgcolor
+    if bgcolor == 'lightblue':
+      bgcolor = 'gainsboro'
+    else:
+      bgcolor = 'lightblue'
