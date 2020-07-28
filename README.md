@@ -11,6 +11,6 @@ https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/FH
 
 ---
 ### To re-run the program
-### - Runtime > Run All
-### - or Runtime > Restart and run all
+- Runtime > Run All
+- or Runtime > Restart and run all
 ![Run all](run_all.png)
