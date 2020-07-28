@@ -1,6 +1,10 @@
 # Fintech Colab
 
-To play with the .ipynb
-1. go to https://colab.research.google.com/github/cyywu/MonetaryBaseVisualiser/blob/master/colab/Financial_Data_Visualizer.ipynb
-2. on the Runtime tap, click Run all
+### 1. HKMA Data
+https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/HKMA_Data.ipynb
 
+### 2. Currency Composition of Official Foreign Exchange
+https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/Cofer.ipynb
+
+### 3. Foreign Holders of US Treasure Securities
+https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/FHoTS.ipynb
