@@ -22,7 +22,7 @@ context = ssl._create_unverified_context()
 fhots_by_country = {}
 
 url = "https://ticdata.treasury.gov/Publish/mfhhis01.txt"
-csv = pd.read_csv("https://ticdata.treasury.gov/Publish/mfhhis01.txt", sep="\t", names=["data"])
+csv = pd.read_csv(url, sep="\t", names=["data"])
 df = pd.DataFrame(csv)
 
 startPoints = df["data"].str.startswith("Country").tolist()
