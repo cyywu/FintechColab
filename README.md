@@ -10,5 +10,7 @@ https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/Co
 https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/FHoTS.ipynb
 
 ---
-### To re-run the whole program, click Runtime > Run All
+### To re-run the program
+### - Runtime > Run All
+### - or Runtime > Restart and run all
 ![Run all](run_all.png)
