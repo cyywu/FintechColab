@@ -8,3 +8,6 @@ https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/Co
 
 ### 3. Foreign Holders of US Treasure Securities
 https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/FHoTS.ipynb
+
+To re-run the whole program, click Runtime > Run All
+![Run all](run_all.png)
