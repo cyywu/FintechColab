@@ -1,10 +1,20 @@
+fixed_plot_width = True # set it to False and click Runtime > Run all if you prefer a responsive width
+plot_width = 600 # customise plot_width and click Runtime > Run all if you prefer a plot_width other than 600px
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set()
 import urllib.request
 import json
+import requests
 from datetime import datetime
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import ssl
+import numpy as np
+import re
 context = ssl._create_unverified_context()
 
 # ---------------- Monetary Base Data ----------------
@@ -358,3 +368,73 @@ LtoD_hkd()
 LtoD_fc()
 
 LtoD_total()
+
+# ---------------- 11. HKD vs RMB's Clearing House Turnover ----------------
+def get_CHT_from_HKMA():
+    # Balance sheet
+    url = 'https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/banking/ch-statistics-ch-turnover?choose=end_of_month&from=1998-09&to=no&sortby=end_of_month&sortorder=asc'
+
+    # retrieve data from hkma api, 100 entries per call, untill every data are retrieveed
+    records = []
+    offset = 0
+    while True:
+        with urllib.request.urlopen(url+"&offset="+str(offset), context=context) as req:
+            data = json.loads(req.read().decode())
+            records += data['result']['records']
+        if data['result']['datasize'] <= 0:
+            break
+        else:
+            offset += 100
+
+    # now data retrieved from hkma are stored in 'records' in a chronological order
+    return records
+
+def CHT_HKD_RMB():
+    cht_records = get_CHT_from_HKMA() 
+
+    records = []
+
+    for record in cht_records:
+      records += [[record['end_of_month'] , record['total_hkd'], record['total_rmb']]]
+        
+    cht_hkd_rmb = pd.DataFrame(np.array(records), columns=['date', 'hkd', 'rmb'])
+    cht_hkd_rmb.date = pd.to_datetime(cht_hkd_rmb.date)
+    cht_hkd_rmb.hkd = pd.to_numeric(cht_hkd_rmb.hkd) * 1000000
+    cht_hkd_rmb.rmb = pd.to_numeric(cht_hkd_rmb.rmb) * 1000000
+    # print(cht_hkd_rmb)
+
+    # plot consolidated chart
+    fig = go.Figure()
+    fig.update_xaxes(
+      rangeselector=dict(
+          buttons=list([
+              dict(count=1, label="1y", step="year", stepmode="backward"),
+              dict(count=3, label="3y", step="year", stepmode="backward"),
+              dict(count=6, label="6y", step="year", stepmode="backward"),
+              dict(count=10, label="10y", step="year", stepmode="backward"),
+              dict(count=15, label="15y", step="year", stepmode="backward"),
+              dict(step="all")
+          ])
+        )
+    )
+    fig.add_trace(go.Scatter(x=cht_hkd_rmb.date, y=cht_hkd_rmb.hkd, mode='lines', name='HKD', line=dict(width=1.5)))
+    fig.add_trace(go.Scatter(x=cht_hkd_rmb.date, y=cht_hkd_rmb.rmb, mode='lines', name='RMB', line=dict(width=1.5)))
+
+    fig.update_layout(
+        title_text="<b>Clearing House Turnover</b>",
+        xaxis_title='End of period <b>(Monthly)</b>',
+        # yaxis_title='<b>USD</b> US Dollars',
+        height=400,
+        showlegend=True,
+        legend=dict(
+            yanchor="top",
+            y=0.99,
+            xanchor="left",
+            x=0.01
+        )
+    )
+    if fixed_plot_width:
+      fig.update_layout(width=plot_width)
+    fig.show()
+
+CHT_hkd_rmb()
