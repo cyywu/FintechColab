@@ -7,8 +7,6 @@ from datetime import datetime
 import ssl
 context = ssl._create_unverified_context()
 
-print("dependency ready")
-
 # ---------------- Monetary Base Data ----------------
 def get_MBC_from_HKMA():
     # Monetary Base Data released by hkma monthly
@@ -28,7 +26,6 @@ def get_MBC_from_HKMA():
 
     # now data retrieved from hkma are stored in 'records' in a chronological order
     return records
-
 
 def MBC():
     records = get_MBC_from_HKMA()
@@ -76,9 +73,7 @@ def MBC():
     plt.legend(loc='upper left')
     plt.show()
 
-
-# MBC()
-
+MBC()
 
 # ---------------- 1. Money Multiplier = M3 / MB (HKD) ----------------
 def get_MSA_from_HKMA():
@@ -99,7 +94,6 @@ def get_MSA_from_HKMA():
 
     # now data retrieved from hkma are stored in 'records' in a chronological order
     return records
-
 
 def MM():
     mbc_records = get_MBC_from_HKMA()
@@ -159,7 +153,6 @@ def MM():
 
 MM()
 
-
 # ---------------- 2. Total deposits & M3 (HKD) ----------------
 def get_TD_from_HKMA():
     # Monetary Supply-Ddjusted
@@ -179,7 +172,6 @@ def get_TD_from_HKMA():
 
     # now data retrieved from hkma are stored in 'records' in a chronological order
     return records
-
 
 def TDHKD():
     msa_records = get_MSA_from_HKMA()
@@ -257,7 +249,6 @@ def get_BS_from_HKMA():
     # now data retrieved from hkma are stored in 'records' in a chronological order
     return records
 
-
 def LtoD_hkd():
     bs_records = get_BS_from_HKMA() 
     
@@ -326,7 +317,6 @@ def LtoD_fc():
                 '2008-06', '2004-06', '1998-09'])
     plt.legend(loc='upper left')
     plt.show()
-
 
 def LtoD_total():
     bs_records = get_BS_from_HKMA() 
