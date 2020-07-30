@@ -14,6 +14,10 @@ https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/Co
 ### 3. Foreign Holders of US Treasure Securities
 https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/FHoTS.ipynb
 
+### 4. BIS Data
+https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/BIS_Data.ipynb
+- Trend of OTC FX by Instrument
+
 ---
 ### To re-run the program
 - Runtime > Run All
