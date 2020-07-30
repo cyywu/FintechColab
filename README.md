@@ -16,7 +16,8 @@ https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/FH
 
 ### 4. BIS Data
 https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/BIS_Data.ipynb
-- Trend of OTC FX by Instrument
+- Trend of Over-the-Counter FX by Instrument
+- Trend of Over-the-Counter FX by Currency Distribution
 
 ---
 ### To re-run the program
