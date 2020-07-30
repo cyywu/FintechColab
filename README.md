@@ -27,11 +27,13 @@ https://colab.research.google.com/github/cyywu/FintechColab/blob/master/colab/BI
 - or Runtime > Restart and run all
 ![Run all](pic/pic_run_all.png)
 
+---
 ### To customise the plot width
 - set 'plot_width'
 - or set 'fixed_plot_width' to False if you want the plot width to be responsive
 ![Plot width](pic/pic_plot_width.png)
 
+---
 ### Make use of 'Compare data on hover'
 ![Compare data on hover 1](pic/pic_compare_data_on_hover_1.png)
 ![Compare data on hover 2](pic/pic_compare_data_on_hover_2.png)
