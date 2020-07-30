@@ -159,7 +159,7 @@ def trendOTCFXbyCurDis():
   fig.show()
 
 # ---------------- Trend of OTC FX by Currency Pair ----------------
-def trandOTCFXbyCurPair():
+def trendOTCFXbyCurPair():
   url = "https://www.bis.org/statistics/rpfx19_fx_tables.xlsx"
   r = requests.get(url) 
   workbook = xlrd.open_workbook(file_contents=r.content)
@@ -219,6 +219,75 @@ def trandOTCFXbyCurPair():
 
   fig.update_layout(
       title_text="<b>Trend of Over-the-counter FX by Currency Pair (stacked)</b>",
+      xaxis_title='End of period <b>(Monthly)</b>',
+      yaxis_title='<b>USD</b> US Dollars',
+      height=800,
+      showlegend=True,
+  )
+  if fixed_plot_width:
+    fig.update_layout(width=plot_width)
+  fig.show()
+
+# ---------------- Trend of OTC FX by Geographical distribution  ----------------
+def trendOTXFXbyGeoDis():
+  url = "https://www.bis.org/statistics/rpfx19_fx_tables.xlsx"
+  r = requests.get(url) 
+  workbook = xlrd.open_workbook(file_contents=r.content)
+  worksheet = workbook.sheet_by_name('Txt_06')
+
+  startAt = 6
+  endBefore = 61
+  endOfMons = []
+  for x in worksheet.row(3)[3:]:
+    if not (x.value == ''):
+      endOfMons.append(str(int(x.value)))
+
+  otcFxbyGeoDis = pd.DataFrame(endOfMons)
+  otcFxbyGeoDis.columns = ['date']
+
+  for i in range(startAt-1, endBefore-1):
+    thisCur = worksheet.row(i)[2:]
+    
+    thisCurName = thisCur[0].value
+
+    thisCurValue = []
+    for j, x in enumerate(thisCur[1:]):
+      if (j % 2) == 0:
+        thisCurValue.append(x.value * 1000000000)
+    
+    for j, x in enumerate(thisCurValue):
+      thisCurValue[j] = [endOfMons[j], thisCurValue[j]]
+    
+    thisDf = pd.DataFrame(thisCurValue)
+    thisDf.columns = ['date', thisCurName]
+    otcFxbyGeoDis = otcFxbyGeoDis.merge(thisDf, how='outer').fillna(method='ffill')
+
+  otcFxbyGeoDis.date = pd.to_datetime(otcFxbyGeoDis.date)
+  dfColumns = list(otcFxbyGeoDis) 
+  for col in dfColumns: 
+    if not col == 'date':
+      otcFxbyGeoDis[col] = pd.to_numeric(otcFxbyGeoDis[col])
+
+  # plot stacked chart
+  fig = go.Figure()
+  fig.update_xaxes(
+    rangeselector=dict(
+        buttons=list([
+            dict(count=1, label="1y", step="year", stepmode="backward"),
+            dict(count=3, label="3y", step="year", stepmode="backward"),
+            dict(count=6, label="6y", step="year", stepmode="backward"),
+            dict(count=10, label="10y", step="year", stepmode="backward"),
+            dict(count=15, label="15y", step="year", stepmode="backward"),
+            dict(step="all")
+        ])
+      )
+  )
+  for col in dfColumns: 
+    if not col == 'date':
+      fig.add_trace(go.Scatter(x=otcFxbyGeoDis.date, y=otcFxbyGeoDis[col], mode='lines', line=dict(width=0.5), stackgroup='otcFxbyGeoDis', name=col))
+
+  fig.update_layout(
+      title_text="<b>Trend of Over-the-counter FX by Geographical distribution (stacked)</b>",
       xaxis_title='End of period <b>(Monthly)</b>',
       yaxis_title='<b>USD</b> US Dollars',
       height=800,
